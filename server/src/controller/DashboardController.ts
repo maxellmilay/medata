@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import db from '../db/firestore.js';
 
 export function fetchMediaTypes(req: Request, res: Response) {
   res.send({ msg: 'media type list' });

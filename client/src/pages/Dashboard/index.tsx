@@ -5,7 +5,7 @@ import MediaFilter from "./MediaFilter"
 
 function Dashboard() {
     return (
-        <div className="h-screen w-screen flex">
+        <div className="max-w-screen-2xl max-h-screen flex grow">
             <Profile />
             <div className="h-full w-10/12 flex flex-col">
                 <MediaFilter />

@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { collection, doc, getFirestore, setDoc } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDz-ikQhunB7SXmx_8zGjcdIsY0ZrwUn9E',
@@ -11,16 +11,6 @@ const firebaseConfig = {
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
-const firestore = getFirestore(firebaseApp);
+const db = getFirestore(firebaseApp);
 
-const specialOfTheDay = doc(firestore, 'menu/dailySpecial');
-
-export function writeDailySpecial() {
-  const docData = {
-    description: 'A delicious vanilla latte',
-    price: 3.99,
-    milk: 'Whole',
-    vegan: false,
-  };
-  setDoc(specialOfTheDay, docData);
-}
+export default db;

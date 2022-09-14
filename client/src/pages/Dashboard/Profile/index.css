@@ -1,0 +1,20 @@
+.profile {
+  width: 15rem;
+}
+
+.profile-header {
+  height: 4rem;
+  background-color: blue;
+}
+
+.profile-info {
+  height: 21.5rem;
+}
+
+.media-types {
+  flex-grow: 1;
+}
+
+.friend-list {
+  height: 5rem;
+}

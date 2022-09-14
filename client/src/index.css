@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('./pages/Dashboard/Profile/index.css');
+@import url('./pages/Dashboard/index.css');
 
 body {
   margin: 0;
