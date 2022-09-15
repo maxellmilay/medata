@@ -10,7 +10,7 @@ function Profile() {
             </div>
             <ProfileInfo />
             <MediaTypes />
-            <div className="width-full grow bg-blue-400"></div>
+            <div className="width-full grow bg-blue-400" />
             <FriendList />
         </div>
     )

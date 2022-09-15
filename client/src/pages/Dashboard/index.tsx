@@ -13,7 +13,7 @@ function Dashboard() {
                     <MediaList />
                     <MediaInfo />
                 </div>
-                <div className="w-full grow bg-black"></div>
+                <div className="w-full grow bg-black" />
             </div>
 
         </div>

@@ -9,8 +9,8 @@ dotenv.config();
 
 app.use(cors());
 
-app.use('/', AuthRouter);
-app.use('/media', DashboardRouter);
+app.use(VERSION, AuthRouter);
+app.use(`${VERSION}${MEDIA}`, DashboardRouter);
 app.use('*', (req, res) => {
   res.status(404).json({ msg: 'Page Not Found' });
 });
