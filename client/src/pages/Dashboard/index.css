@@ -1,4 +1,7 @@
-.dashboard-media-content {
-  position: relative;
-  left: 15rem;
+.media-item {
+  height: 29.75rem;
+}
+
+.media-filter {
+  height: 4rem;
 }

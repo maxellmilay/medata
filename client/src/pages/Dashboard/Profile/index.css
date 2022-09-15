@@ -11,10 +11,12 @@
   height: 21.5rem;
 }
 
-.media-types {
-  flex-grow: 1;
-}
-
 .friend-list {
   height: 5rem;
+}
+
+
+
+.media-types {
+  height: 10rem;
 }

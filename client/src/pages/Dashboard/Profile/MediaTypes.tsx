@@ -8,6 +8,7 @@ function MediaTypes() {
             <p className="mt-1 text-sm">Movies</p>
             <p className="mt-1 text-sm">Anime</p>
             <p className="mt-1 text-sm">Books</p>
+
         </div>
     )
 }
