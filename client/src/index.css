@@ -3,6 +3,8 @@
 @tailwind utilities;
 @import url('./pages/Dashboard/Profile/index.css');
 @import url('./pages/Dashboard/index.css');
+@import url('./styles/fonts.css');
+
 html {
   height: 100%;
 }
@@ -24,3 +26,4 @@ code {
 #root {
   height: 100%;
 }
+

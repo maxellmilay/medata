@@ -6,7 +6,7 @@ function Profile() {
     return (
         <div className="h-full relative flex flex-col profile">
             <div className="w-full flex profile-header">
-                <h2 className="m-auto">M E D A T A</h2>
+                <h2 className="m-auto source-sans-pro-bold text-xl tracking-widest">MEDATA</h2>
             </div>
             <ProfileInfo />
             <MediaTypes />
