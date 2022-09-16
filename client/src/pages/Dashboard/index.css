@@ -1,5 +1,9 @@
-.media-item {
+.media-list {
   height: 31.375rem;
+}
+
+.media-item {
+  height: 36.375rem;
 }
 
 .media-filter {
