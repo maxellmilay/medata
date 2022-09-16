@@ -4,7 +4,6 @@ import ProfileOptions from "./ProfileOptions"
 function MediaInfo() {
     return (
         <div className="flex flex-col h-full w-3/5 grow">
-            <ProfileOptions />
             <MediaItemDetails />
         </div>
     )

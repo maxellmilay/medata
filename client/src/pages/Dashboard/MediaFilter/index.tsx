@@ -5,9 +5,8 @@ function MediaFilter() {
             <p className="open-sans">Search</p>
             <div className="flex mx-auto">
                 <h2 className="text-xl open-sans-bold">All Tasks </h2>
-                <div className="bg-blue-500 w-7 h-7 ml-2"></div>
             </div>
-            <div className="flex">
+            <div className="flex ml-6">
                 <div className="bg-blue-500 w-2 h-2 ml-0.5"></div>
                 <div className="bg-blue-500 w-2 h-2 ml-0.5"></div>
                 <div className="bg-blue-500 w-2 h-2 ml-0.5"></div>

@@ -1,6 +1,6 @@
 function MediaItemDetails() {
     return (
-        <div className="flex w-full px-7 overflow-auto media-item border scrollbar">
+        <div className="flex grow w-full px-7 overflow-auto media-item border scrollbar">
             <div className="flex h-full justify-center w-1/12">
                 <div className="bg-blue-500 w-7 h-7 mt-11"></div>
             </div>
