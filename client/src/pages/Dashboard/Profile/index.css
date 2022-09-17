@@ -1,5 +1,6 @@
 .profile {
   width: 15rem;
+  min-width: 15rem;
 }
 
 .profile-header {

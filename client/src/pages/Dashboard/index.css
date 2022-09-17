@@ -9,3 +9,8 @@
 .media-filter {
   height: 4rem;
 }
+
+.media-pic {
+  min-height: 15rem;
+  min-width: 15rem;
+}

@@ -9,22 +9,19 @@ function ProfileInfo() {
                 <div className="bg-blue-500 w-7 h-7 mr-3"></div>
                 <div className="bg-blue-500 w-7 h-7"></div>
             </div>
-            <div className="flex mt-2.5">
+            <div className="flex mt-2.5 mb-1">
                 <div className="flex flex-col items-center w-20">
-                    <p className="font-bold open-sans">12</p>
-                    <p className="text-xs open-sans">Completed</p>
-                    <p className="text-xs open-sans">Tasks</p>
+                    <p className="font-bold open-sans text-sm">12</p>
+                    <p className="xxs open-sans">Completed</p>
                 </div>
                 <div className="flex flex-col items-center w-20">
-                    <p className="font-bold open-sans">22</p>
-                    <p className="text-xs open-sans">To do</p>
-                    <p className="text-xs open-sans">Tasks</p>
+                    <p className="font-bold open-sans text-sm">22</p>
+                    <p className="xxs open-sans">In Progress</p>
                 </div>
-                <div className="flex flex-col items-center w-20">
-                    <p className="font-bold open-sans">243</p>
-                    <p className="text-xs open-sans">All</p>
-                    <p className="text-xs open-sans">Workload</p>
-                </div>
+            </div>
+            <div className="flex flex-col items-center w-20">
+                <p className="font-bold open-sans text-sm">51</p>
+                <p className="xxs open-sans">Total Media</p>
             </div>
         </div>
     )
