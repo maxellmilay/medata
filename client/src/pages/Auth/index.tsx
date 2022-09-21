@@ -4,13 +4,14 @@ import SignupRedirect from "./Login/SignupRedirect";
 import LoginRedirect from "./Signup/LoginRedirect";
 import LoginContainer from "./Login";
 import { useState } from "react";
+import { DASHBOARD } from "../../routes/route";
 
 function Auth() {
     const navigate = useNavigate();
     const [isLoggingIn, setIsLoggingIn] = useState(true)
 
     function handleLogin(): void {
-        navigate('/dashboard');
+        navigate(DASHBOARD);
     }
 
     function handleAuthSwitch(): void {
