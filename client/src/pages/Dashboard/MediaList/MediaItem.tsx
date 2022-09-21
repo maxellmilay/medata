@@ -1,9 +1,6 @@
-type MediaItemProps = {
-    title: String
-    owner: String
-}
+import { MediaItemType } from "../../../interface/MediaInterface"
 
-function MediaItem({ title, owner }: MediaItemProps) {
+function MediaItem({ title, owner }: MediaItemType) {
     return (
         <div className="w-full flex px-5 py-5 items-center border bg-gray-100">
             <div className="bg-blue-500 w-7 h-7 mr-3"></div>
