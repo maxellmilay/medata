@@ -5,4 +5,4 @@ export const SIGNUP = '/signup';
 export const TYPES = '/types';
 export const ITEMS = '/items';
 export const ADD_ITEM = '/addItem';
-export const ID_PARAM = '/:id';
+export const ID_PARAM = '/item/:id';

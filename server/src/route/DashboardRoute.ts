@@ -1,4 +1,4 @@
-import express from "express";
+import express from 'express';
 import {
   addMediaItem,
   deleteMediaItem,
@@ -6,11 +6,10 @@ import {
   fetchMediaTypes,
   fetchSingleMediaItem,
   updateMediaItem,
-} from "../controller/DashboardController.js";
-import { TYPES, ITEMS, ADD_ITEM, ID_PARAM } from "../constants/routes.js";
+} from '../controller/DashboardController.js';
+import { TYPES, ITEMS, ADD_ITEM, ID_PARAM } from '../constants/routes.js';
 const DashboardRouter = express.Router();
 
-//add media to server middleware parameter
 DashboardRouter.route(TYPES).get(fetchMediaTypes);
 DashboardRouter.route(ITEMS).get(fetchMediaItems);
 DashboardRouter.route(ADD_ITEM).post(addMediaItem);
