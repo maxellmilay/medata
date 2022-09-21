@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { createMedia, getAllMedia } from '../services/MediaService.js';
+import { StatusCodes } from 'http-status-codes';
 
 export async function fetchMediaTypes(req: Request, res: Response) {
   const allMedia = await getAllMedia();
@@ -11,12 +12,12 @@ export async function fetchMediaTypes(req: Request, res: Response) {
     }
     mediaTypes.push(item.type);
   });
-  res.send(mediaTypes);
+  res.status(StatusCodes.OK).send(mediaTypes);
 }
 
 export async function fetchMediaItems(req: Request, res: Response) {
   const allMedia = await getAllMedia();
-  res.json(allMedia);
+  res.status(StatusCodes.OK).json(allMedia);
 }
 
 export async function addMediaItem(req: Request, res: Response) {
@@ -26,7 +27,7 @@ export async function addMediaItem(req: Request, res: Response) {
     title: 'cool movie',
     type: 'movie',
   });
-  res.json({ msg: 'success' });
+  res.status(StatusCodes.OK).json({ msg: 'success' });
 }
 
 export function fetchSingleMediaItem(req: Request, res: Response) {
