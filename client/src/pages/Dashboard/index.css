@@ -1,5 +1,6 @@
 .media-list {
-  height: 31.375rem;
+  /* height: 31.375rem; */
+  height: 27rem;
 }
 
 .media-item {
@@ -13,4 +14,8 @@
 .media-pic {
   min-height: 15rem;
   min-width: 15rem;
+}
+
+.add-item-button {
+  height: 4.375rem;
 }

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
-import { MediaItemType } from "../../../interface/MediaInterface"
+import { MediaItemType, ToggleModalType } from "../../../interface/MediaInterface"
 import MediaItem from "./MediaItem"
 import TypeTitle from "./TypeTitle"
 import axios from 'axios'
+import AddMediaButton from "./AddIMediaButton"
 
-function MediaList() {
+function MediaList({ toggleModal }: ToggleModalType) {
     const [mediaList, setMediaList] = useState<MediaItemType[]>([] as MediaItemType[])
 
     async function fetchMedia() {
@@ -25,6 +26,7 @@ function MediaList() {
                     return <MediaItem key={item.id} title={item.title} owner={item.owner} />
                 })}
             </div>
+            <AddMediaButton toggleModal={toggleModal} />
         </div>
     )
 }

@@ -5,3 +5,7 @@ export type MediaItemType = {
   owner: String;
   id?: React.Key;
 };
+
+export type ToggleModalType = {
+  toggleModal: () => void;
+};
