@@ -21,13 +21,9 @@ export async function fetchMediaItems(req: Request, res: Response) {
 }
 
 export async function addMediaItem(req: Request, res: Response) {
-  await createMedia({
-    owner: 'Max',
-    synopsis: 'hahahahhahehe',
-    title: 'cool movie',
-    type: 'movie',
-  });
-  res.status(StatusCodes.OK).json({ msg: 'success' });
+  const newMedia = req.body;
+  await createMedia(newMedia);
+  res.status(StatusCodes.OK).json(newMedia);
 }
 
 export function fetchSingleMediaItem(req: Request, res: Response) {

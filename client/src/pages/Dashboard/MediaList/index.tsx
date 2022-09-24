@@ -5,15 +5,12 @@ import TypeTitle from "./TypeTitle"
 import axios from 'axios'
 import AddMediaButton from "./AddIMediaButton"
 
-function MediaList({ toggleModal }: ToggleModalType) {
-    const [mediaList, setMediaList] = useState<MediaItemType[]>([] as MediaItemType[])
+type MediaListProps = ToggleModalType & {
+    fetchMedia: () => Promise<void>
+    mediaList: MediaItemType[]
+}
 
-    async function fetchMedia() {
-        const response = await axios.get('http://localhost:5000/v1/media/items')
-        const responseMediaData = response.data
-        setMediaList(responseMediaData)
-    }
-
+function MediaList({ toggleModal, fetchMedia, mediaList }: MediaListProps) {
     useEffect(() => {
         fetchMedia();
     }, [])
