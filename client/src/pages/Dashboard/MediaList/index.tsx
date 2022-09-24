@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { MediaItemType, ToggleModalType } from "../../../interface/MediaInterface"
 import MediaItem from "./MediaItem"
 import TypeTitle from "./TypeTitle"
-import axios from 'axios'
 import AddMediaButton from "./AddIMediaButton"
 
 type MediaListProps = ToggleModalType & {
@@ -11,6 +10,7 @@ type MediaListProps = ToggleModalType & {
 }
 
 function MediaList({ toggleModal, fetchMedia, mediaList }: MediaListProps) {
+
     useEffect(() => {
         fetchMedia();
     }, [])
