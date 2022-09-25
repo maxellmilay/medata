@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
-import { createMedia, getAllMedia } from '../services/MediaService.js';
+import {
+  createMedia,
+  getAllMedia,
+  getSingleMedia,
+} from '../services/MediaService.js';
 import { StatusCodes } from 'http-status-codes';
 
 export async function fetchMediaTypes(req: Request, res: Response) {
@@ -26,8 +30,10 @@ export async function addMediaItem(req: Request, res: Response) {
   res.status(StatusCodes.OK).json(newMedia);
 }
 
-export function fetchSingleMediaItem(req: Request, res: Response) {
-  res.send('single media item');
+export async function fetchSingleMediaItem(req: Request, res: Response) {
+  const { id } = req.params;
+  const currentMedia = await getSingleMedia(id);
+  res.status(StatusCodes.OK).json(currentMedia);
 }
 
 export function updateMediaItem(req: Request, res: Response) {

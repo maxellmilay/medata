@@ -1,4 +1,13 @@
-import { addDoc, collection, getDocs, DocumentData } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  getDocs,
+  DocumentData,
+  doc,
+  query,
+  where,
+  getDoc,
+} from 'firebase/firestore';
 import db from '../db/firestore.js';
 
 type InfoType = {
@@ -20,4 +29,11 @@ export async function getAllMedia() {
     allMedia.push({ id: doc.id, ...docData });
   });
   return allMedia;
+}
+
+export async function getSingleMedia(queryID: any) {
+  const docRef = doc(db, 'media', queryID);
+  const docSnap = await getDoc(docRef);
+  const mediaData = docSnap.data();
+  return mediaData;
 }
