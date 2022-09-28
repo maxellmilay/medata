@@ -11,9 +11,18 @@ function Dashboard() {
     const [modalOn, setModalOn] = useState(false)
     const [mediaList, setMediaList] = useState<MediaItemType[]>([] as MediaItemType[])
     const [currentMedia, setCurrentMedia] = useState<MediaInfoType>({ title: '', owner: '', type: '', synopsis: '' } as MediaInfoType)
+    const [mediaTypes, setMediaTypes] = useState<String[]>([] as String[])
+    const [currentMediaType, setCurrentMediaType] = useState<String>('Types' as String)
+    const [isDropped, setIsDropped] = useState<Boolean>(false)
 
-    async function fetchMedia() {
-        const response = await axios.get('http://localhost:5000/v1/media/items')
+    async function fetchMediaType() {
+        const response = await axios.get('http://localhost:5000/v1/media/types')
+        const responseMediaTypes = response.data
+        setMediaTypes(responseMediaTypes)
+    }
+    async function fetchMedia(type?: String) {
+        const queryType = type || currentMediaType
+        const response = await axios.get(`http://localhost:5000/v1/media/items/?type=${queryType}`)
         const responseMediaData = response.data
         setMediaList(responseMediaData)
     }
@@ -24,11 +33,11 @@ function Dashboard() {
 
     return (
         <div className="h-full flex relative">
-            <Profile />
+            <Profile fetchMedia={fetchMedia} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} fetchMediaType={fetchMediaType} />
             <div className="h-full grow flex flex-col">
                 <MediaFilter />
                 <div className="flex w-full">
-                    <MediaList toggleModal={toggleModal} fetchMedia={fetchMedia} mediaList={mediaList} setCurrentMedia={setCurrentMedia} />
+                    <MediaList isDropped={isDropped} setIsDropped={setIsDropped} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} toggleModal={toggleModal} fetchMedia={fetchMedia} mediaList={mediaList} setCurrentMedia={setCurrentMedia} />
                     {currentMedia.title !== '' && <MediaInfo currentMedia={currentMedia} />}
                 </div>
                 <div className="w-full grow" />

@@ -3,7 +3,7 @@ import { useState } from "react"
 import { ToggleModalType } from "../../../interface/MediaInterface";
 
 type AddMediaProps = ToggleModalType & {
-    fetchMedia: () => Promise<void>
+    fetchMedia: (type?: String) => Promise<void>
 }
 
 function AddMedia({ toggleModal, fetchMedia }: AddMediaProps) {

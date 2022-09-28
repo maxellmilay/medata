@@ -3,6 +3,7 @@ import {
   createMedia,
   getAllMedia,
   getSingleMedia,
+  getAllFilteredMedia,
 } from '../services/MediaService.js';
 import { StatusCodes } from 'http-status-codes';
 
@@ -20,7 +21,8 @@ export async function fetchMediaTypes(req: Request, res: Response) {
 }
 
 export async function fetchMediaItems(req: Request, res: Response) {
-  const allMedia = await getAllMedia();
+  const { type } = req.query;
+  const allMedia = await getAllFilteredMedia(type);
   res.status(StatusCodes.OK).json(allMedia);
 }
 

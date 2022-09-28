@@ -30,6 +30,17 @@ export async function getAllMedia() {
   });
   return allMedia;
 }
+export async function getAllFilteredMedia(query?: any) {
+  const querySnapshot = await getDocs(collection(db, 'media'));
+  const allMedia: DocumentData[] = [];
+  querySnapshot.forEach((doc) => {
+    const docData = doc.data();
+    if (docData.type === query) {
+      allMedia.push({ id: doc.id, ...docData });
+    }
+  });
+  return allMedia;
+}
 
 export async function getSingleMedia(queryID: any) {
   const docRef = doc(db, 'media', queryID);
