@@ -20,10 +20,31 @@ export async function fetchMediaTypes(req: Request, res: Response) {
   res.status(StatusCodes.OK).send(mediaTypes);
 }
 
+export async function fetchStatusInfo(req: Request, res: Response) {
+  const allMedia = await getAllMedia();
+  const inProgress = allMedia.filter(
+    (media) => media.statusType === 'In Progress'
+  );
+  const completed = allMedia.filter(
+    (media) => media.statusType === 'Completed'
+  );
+  const toExplore = allMedia.filter(
+    (media) => media.statusType === 'To Explore'
+  );
+  const dropped = allMedia.filter((media) => media.statusType === 'Droppped');
+  res.status(StatusCodes.OK).json({
+    total: allMedia.length,
+    inProgress: inProgress.length,
+    completed: completed.length,
+    toExplore: toExplore.length,
+    dropped: dropped.length,
+  });
+}
+
 export async function fetchMediaItems(req: Request, res: Response) {
   const { type } = req.query;
-  const allMedia = await getAllFilteredMedia(type);
-  res.status(StatusCodes.OK).json(allMedia);
+  const filteredMedia = await getAllFilteredMedia(type);
+  res.status(StatusCodes.OK).json(filteredMedia);
 }
 
 export async function addMediaItem(req: Request, res: Response) {

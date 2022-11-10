@@ -1,16 +1,24 @@
-import React from 'react';
+import { StatusInterface } from './StatusInterface';
 
 export type MediaItemType = MediaInfoType & {
-  id: String;
+  id: string;
 };
 
 export type ToggleModalType = {
   toggleModal: () => void;
 };
 
-export type MediaInfoType = {
-  title: String;
-  owner: String;
-  type: String;
-  synopsis: String;
-};
+export interface MediaInfoType extends StatusInterface {
+  title: string;
+  owner: string;
+  type: string;
+  synopsis: string;
+}
+
+export interface StatusNumbers {
+  total: number;
+  inProgress: number;
+  completed: number;
+  toExpore: number;
+  dropeed: number;
+}

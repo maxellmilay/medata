@@ -5,7 +5,7 @@ import MediaFilter from "./MediaFilter"
 import AddMedia from "./AddMedia"
 import { useState } from "react"
 import axios from "axios"
-import { MediaInfoType, MediaItemType } from "../../interface/MediaInterface"
+import { MediaInfoType, MediaItemType} from "../../interface/MediaInterface"
 
 function Dashboard() {
     const [modalOn, setModalOn] = useState(false)
@@ -14,12 +14,14 @@ function Dashboard() {
     const [mediaTypes, setMediaTypes] = useState<String[]>([] as String[])
     const [currentMediaType, setCurrentMediaType] = useState<String>('Types' as String)
     const [isDropped, setIsDropped] = useState<Boolean>(false)
+    
 
     async function fetchMediaType() {
         const response = await axios.get('http://localhost:5000/v1/media/types')
         const responseMediaTypes = response.data
         setMediaTypes(responseMediaTypes)
     }
+
     async function fetchMedia(type?: String) {
         const queryType = type || currentMediaType
         const response = await axios.get(`http://localhost:5000/v1/media/items/?type=${queryType}`)

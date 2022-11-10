@@ -1,6 +1,7 @@
 import ProfileInfo from "./ProfileInfo"
 import MediaTypes from "./MediaTypes"
 import FriendList from "./FriendList"
+import { MediaItemType } from "../../../interface/MediaInterface"
 
 type ProfileProps = {
     fetchMediaType: () => Promise<void>

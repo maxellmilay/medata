@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
-import { DASHBOARD, LOGIN } from './routes/route';
+import { FrontendRoute } from './enums/Routes';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={LOGIN} element={<Auth />} />
-        <Route path={DASHBOARD} element={<Dashboard />} />
+        <Route path={FrontendRoute.LOGIN} element={<Auth />} />
+        <Route path={FrontendRoute.DASHBOARD} element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );

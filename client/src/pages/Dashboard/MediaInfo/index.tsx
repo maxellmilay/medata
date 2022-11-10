@@ -13,10 +13,10 @@ function MediaInfo({ currentMedia }: MediaInfoProps) {
                 <p className="mb-3 text-xs">{currentMedia.owner}</p>
                 <div className="flex mb-3 px-5 py-3 bg-gray-100 rounded">
                     <div className="mr-4 px-1 py-1 bg-white border border-gray-400 rounded">
-                        <p>Watching</p>
+                        <p>{currentMedia.statusType}</p>
                     </div>
                     <div className="px-1 py-1 bg-white border border-gray-400 rounded">
-                        <p>Progress:  18/24</p>
+                        <p>{currentMedia.progress}/{currentMedia.totalContent}</p>
                     </div>
                 </div>
             </div>
