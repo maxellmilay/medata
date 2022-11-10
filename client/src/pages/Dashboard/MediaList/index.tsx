@@ -4,6 +4,7 @@ import MediaItem from "./MediaItem"
 import TypeTitle from "./TypeTitle"
 import AddMediaButton from "./AddIMediaButton"
 
+
 type MediaListProps = ToggleModalType & {
     fetchMedia: (type?: String) => Promise<void>
     mediaList: MediaItemType[]
@@ -22,7 +23,7 @@ function MediaList({ toggleModal, fetchMedia, mediaList, setCurrentMedia, mediaT
     }, [])
 
     return (
-        <div className="flex flex-col w-2/5 max-w-4xl border-b">
+        <div className="flex flex-col w-2/5 max-w-4xl border-b border-r">
             <TypeTitle isDropped={isDropped} setIsDropped={setIsDropped} mediaTypes={mediaTypes} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} fetchMedia={fetchMedia} />
             <div className="flex flex-col media-list overflow-auto scrollbar">
                 {mediaList.map((item: MediaItemType, index) => {

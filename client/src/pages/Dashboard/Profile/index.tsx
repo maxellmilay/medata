@@ -1,6 +1,6 @@
 import ProfileInfo from "./ProfileInfo"
 import MediaTypes from "./MediaTypes"
-import FriendList from "./FriendList"
+import Misc from "./Misc"
 import { MediaItemType } from "../../../interface/MediaInterface"
 
 type ProfileProps = {
@@ -14,12 +14,12 @@ function Profile({ mediaTypes, fetchMediaType, setCurrentMediaType, fetchMedia }
     return (
         <div className="h-full relative flex flex-col profile border-r">
             <div className="w-full flex profile-header border-b">
-                <h2 className="m-auto source-sans-pro text-xl tracking-widest text-gray-500">MEDATA</h2>
+                <h2 className="m-auto source-sans-pro text-xl tracking-widest text-black font-bold">MEDATA</h2>
             </div>
             <ProfileInfo />
             <MediaTypes fetchMedia={fetchMedia} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} fetchMediaType={fetchMediaType} />
             <div className="width-full grow" />
-            <FriendList />
+            <Misc />
         </div>
     )
 }
