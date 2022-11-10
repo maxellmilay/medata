@@ -14,9 +14,10 @@ type MediaListProps = ToggleModalType & {
     setCurrentMediaType: React.Dispatch<React.SetStateAction<String>>
     isDropped: Boolean
     setIsDropped: React.Dispatch<React.SetStateAction<Boolean>>
+    fetchAllMedia: () => Promise<void>
 }
 
-function MediaList({ toggleModal, fetchMedia, mediaList, setCurrentMedia, mediaTypes, currentMediaType, setCurrentMediaType, isDropped, setIsDropped }: MediaListProps) {
+function MediaList({ fetchAllMedia, toggleModal, fetchMedia, mediaList, setCurrentMedia, mediaTypes, currentMediaType, setCurrentMediaType, isDropped, setIsDropped }: MediaListProps) {
 
     useEffect(() => {
         fetchMedia();
@@ -24,7 +25,7 @@ function MediaList({ toggleModal, fetchMedia, mediaList, setCurrentMedia, mediaT
 
     return (
         <div className="flex flex-col w-2/5 max-w-4xl border-b border-r">
-            <TypeTitle isDropped={isDropped} setIsDropped={setIsDropped} mediaTypes={mediaTypes} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} fetchMedia={fetchMedia} />
+            <TypeTitle fetchAllMedia={fetchAllMedia} isDropped={isDropped} setIsDropped={setIsDropped} mediaTypes={mediaTypes} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} fetchMedia={fetchMedia} />
             <div className="flex flex-col media-list overflow-auto scrollbar">
                 {mediaList.map((item: MediaItemType, index) => {
                     return <MediaItem key={index} mediaItem={item} setCurrentMedia={setCurrentMedia} />

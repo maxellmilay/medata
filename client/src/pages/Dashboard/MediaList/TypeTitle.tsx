@@ -8,9 +8,10 @@ type TypeTitleProps = {
     fetchMedia: (type?: String) => Promise<void>
     isDropped: Boolean
     setIsDropped: React.Dispatch<React.SetStateAction<Boolean>>
+    fetchAllMedia: () => Promise<void>
 }
 
-function TypeTitle({ mediaTypes, currentMediaType, setCurrentMediaType, fetchMedia, isDropped, setIsDropped }: TypeTitleProps) {
+function TypeTitle({ fetchAllMedia, mediaTypes, currentMediaType, setCurrentMediaType, fetchMedia, isDropped, setIsDropped }: TypeTitleProps) {
 
     function handleDrop() {
         setIsDropped(!isDropped)
@@ -22,7 +23,7 @@ function TypeTitle({ mediaTypes, currentMediaType, setCurrentMediaType, fetchMed
                 <h1 className="ml-10 mr-auto open-sans font-bold">{currentMediaType}</h1>
                 <ChevronDown />
             </button>
-            {isDropped && <TypeDropDown handleDrop={handleDrop} mediaTypes={mediaTypes} setCurrentMediaType={setCurrentMediaType} fetchMedia={fetchMedia} />}
+            {isDropped && <TypeDropDown fetchAllMedia={fetchAllMedia} handleDrop={handleDrop} mediaTypes={mediaTypes} setCurrentMediaType={setCurrentMediaType} fetchMedia={fetchMedia} />}
         </div>
 
     )

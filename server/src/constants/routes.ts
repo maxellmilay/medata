@@ -4,6 +4,7 @@ export const LOGIN = '/login';
 export const SIGNUP = '/signup';
 export const TYPES = '/types';
 export const ITEMS = '/items';
+export const ALL_ITEMS = '/allItems';
 export const STATUS = '/status';
 export const ADD_ITEM = '/addItem';
 export const ID_PARAM = '/item/:id';

@@ -20,6 +20,11 @@ export async function fetchMediaTypes(req: Request, res: Response) {
   res.status(StatusCodes.OK).send(mediaTypes);
 }
 
+export async function fetchAllMedia(req: Request, res: Response) {
+  const allMedia = await getAllMedia();
+  res.status(StatusCodes.OK).json(allMedia);
+}
+
 export async function fetchStatusInfo(req: Request, res: Response) {
   const allMedia = await getAllMedia();
   const inProgress = allMedia.filter(
