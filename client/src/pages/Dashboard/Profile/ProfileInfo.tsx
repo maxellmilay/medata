@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react"
 import { StatusNumbers } from "../../../interface/MediaInterface"
 import axios from 'axios'
+import { MediaItemType } from '../../../interface/MediaInterface'
 
-function ProfileInfo() {
+interface ProfileInfoPropsInterface {
+    mediaList: MediaItemType[]
+}
+
+function ProfileInfo({ mediaList }: ProfileInfoPropsInterface) {
     const [statusNumbers, setStatusNumbers] = useState<StatusNumbers>()
 
     async function fetchStatusInfo() {
@@ -13,7 +18,7 @@ function ProfileInfo() {
 
     useEffect(() => {
         fetchStatusInfo()
-    }, [])
+    }, [mediaList])
 
     return (
         <div className="w-full flex flex-col items-center px-5 py-5 profile-info border-b">

@@ -7,7 +7,7 @@ type AddMediaProps = ToggleModalType & {
 }
 
 function AddMedia({ toggleModal, fetchMedia }: AddMediaProps) {
-    const [newMedia, setNewMedia] = useState({ title: '', owner: '', type: '', synopsis: '' })
+    const [newMedia, setNewMedia] = useState({ title: '', owner: '', type: '', synopsis: '', statusType: '', progress: 0, totalContent: 0 })
 
     function handleMediaChange(e: React.ChangeEvent<HTMLInputElement>) {
         setNewMedia({ ...newMedia, [e.target.name]: e.target.value })
@@ -40,6 +40,18 @@ function AddMedia({ toggleModal, fetchMedia }: AddMediaProps) {
                         <div className="mb-2 w-full flex">
                             <label htmlFor="synopsis" className="mr-2">Synopsis: </label>
                             <input type="text" id="synopsis" name='synopsis' value={newMedia.synopsis} onChange={e => handleMediaChange(e)} className="grow" />
+                        </div>
+                        <div className="mb-2 w-full flex">
+                            <label htmlFor="statusType" className="mr-2">Status Type: </label>
+                            <input type="text" id="statusType" name='statusType' value={newMedia.statusType} onChange={e => handleMediaChange(e)} className="grow" />
+                        </div>
+                        <div className="mb-2 w-full flex">
+                            <label htmlFor="progress" className="mr-2">Progress: </label>
+                            <input type="number" id="progress" name='progress' value={newMedia.progress} onChange={e => handleMediaChange(e)} className="grow" />
+                        </div>
+                        <div className="mb-2 w-full flex">
+                            <label htmlFor="totalContent" className="mr-2">Total: </label>
+                            <input type="number" id="totalContent" name='totalContent' value={newMedia.totalContent} onChange={e => handleMediaChange(e)} className="grow" />
                         </div>
                     </div>
                     <div>

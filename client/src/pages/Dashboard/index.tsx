@@ -27,6 +27,7 @@ function Dashboard() {
         const response = await axios.get(`http://localhost:5000/v1/media/items/?type=${queryType}`)
         const responseMediaData = response.data
         setMediaList(responseMediaData)
+
     }
 
     async function fetchAllMedia() {
@@ -45,11 +46,11 @@ function Dashboard() {
 
     return (
         <div className="h-full flex relative">
-            <Profile fetchMedia={fetchMedia} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} fetchMediaType={fetchMediaType} />
+            <Profile mediaList={mediaList} fetchMedia={fetchMedia} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} fetchMediaType={fetchMediaType} />
             <div className="h-full grow flex flex-col">
                 <MediaFilter />
                 <div className="flex w-full">
-                    <MediaList fetchAllMedia={fetchAllMedia} isDropped={isDropped} setIsDropped={setIsDropped} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} toggleModal={toggleModal} fetchMedia={fetchMedia} mediaList={mediaList} setCurrentMedia={setCurrentMedia} />
+                    <MediaList fetchMediaType={fetchMediaType} fetchAllMedia={fetchAllMedia} isDropped={isDropped} setIsDropped={setIsDropped} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} toggleModal={toggleModal} fetchMedia={fetchMedia} mediaList={mediaList} setCurrentMedia={setCurrentMedia} />
                     {currentMedia.title !== '' && <MediaInfo currentMedia={currentMedia} />}
                 </div>
                 <div className="w-full grow" />

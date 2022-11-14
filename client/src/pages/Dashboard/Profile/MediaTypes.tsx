@@ -11,7 +11,7 @@ type MediaTypeProps = {
 function MediaTypes({ mediaTypes, fetchMediaType, setCurrentMediaType, fetchMedia }: MediaTypeProps) {
     useEffect(() => {
         fetchMediaType()
-    }, [])
+    }, [mediaTypes])
 
     function handleChangeMediaType(type: String) {
         setCurrentMediaType(type)

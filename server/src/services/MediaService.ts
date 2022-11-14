@@ -7,14 +7,18 @@ import {
   query,
   where,
   getDoc,
+  deleteDoc,
 } from 'firebase/firestore';
 import db from '../db/firestore.js';
 
 type InfoType = {
-  owner: String;
-  synopsis: String;
-  title: String;
-  type: String;
+  owner: string;
+  synopsis: string;
+  title: string;
+  type: string;
+  statusType: string;
+  progress: number;
+  totalContent: number;
 };
 
 export async function createMedia(info: InfoType) {
@@ -47,4 +51,8 @@ export async function getSingleMedia(queryID: any) {
   const docSnap = await getDoc(docRef);
   const mediaData = docSnap.data();
   return mediaData;
+}
+
+export async function deleteSingleMedia(queryID: any) {
+  await deleteDoc(doc(db, 'media', queryID));
 }

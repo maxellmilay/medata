@@ -4,6 +4,7 @@ import {
   getAllMedia,
   getSingleMedia,
   getAllFilteredMedia,
+  deleteSingleMedia,
 } from '../services/MediaService.js';
 import { StatusCodes } from 'http-status-codes';
 
@@ -68,6 +69,8 @@ export function updateMediaItem(req: Request, res: Response) {
   res.send('update media item');
 }
 
-export function deleteMediaItem(req: Request, res: Response) {
-  res.send('delete media item');
+export async function deleteMediaItem(req: Request, res: Response) {
+  const { id } = req.params;
+  await deleteSingleMedia(id);
+  res.status(StatusCodes.OK);
 }
