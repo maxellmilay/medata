@@ -1,34 +1,43 @@
-import axios from "axios";
-import { useState } from "react"
-import { ToggleModalType } from "../../../interface/MediaInterface";
+import { useState } from "react";
 import { MediaInfoType } from '../../../interface/MediaInterface'
+import axios from 'axios'
 
-type AddMediaProps = ToggleModalType & {
-    fetchMedia: (type?: String) => Promise<void>
-    fetchAllMedia: () => Promise<void>
-    fetchMediaType: () => Promise<void>
+type EditMediaProps = {
     currentMediaType: String
+    currentMedia: MediaInfoType
+    fetchMedia: (type?: String) => Promise<void>
+    toggleEditModal: () => void
+    fetchAllMedia: () => Promise<void>
+    currentMediaID: String
+    fetchMediaType: () => Promise<void>
 }
 
-function AddMedia({ toggleModal, fetchMedia, fetchAllMedia, fetchMediaType, currentMediaType }: AddMediaProps) {
-    const [newMedia, setNewMedia] = useState({ title: '', owner: '', type: '', synopsis: '', statusType: '', progress: 0, totalContent: 0 })
+const EditMedia = ({ currentMedia, currentMediaID, toggleEditModal, currentMediaType, fetchMedia, fetchAllMedia, fetchMediaType }: EditMediaProps) => {
+    const [newMedia, setNewMedia] = useState({ title: currentMedia.title, owner: currentMedia.owner, type: currentMedia.type, synopsis: currentMedia.synopsis, statusType: currentMedia.statusType, progress: currentMedia.progress, totalContent: currentMedia.totalContent })
 
     function handleMediaChange(e: React.ChangeEvent<HTMLInputElement>) {
         setNewMedia({ ...newMedia, [e.target.name]: e.target.value })
     }
 
-    async function saveNewMedia() {
-        toggleModal();
-        await axios.post('http://localhost:5000/v1/media/addItem', newMedia)
+    async function saveUpdatedMedia() {
+        toggleEditModal();
+        await axios.patch(`http://localhost:5000/v1/media/item/${currentMediaID}`, newMedia)
         fetchMediaType()
         currentMediaType === "All" ? fetchAllMedia() : fetchMedia();
+    }
+
+    async function handleDeleteMedia() {
+        await axios.delete(`http://localhost:5000/v1/media/item/${currentMediaID}`)
+        currentMediaType === "All" ? fetchAllMedia() : fetchMedia();
+        toggleEditModal()
+
     }
 
     return (
         <div className="bg-zinc-200 bg-opacity-80 fixed inset-0 z-50">
             <div className="flex h-screen justify-center items-center">
                 <div className="flex flex-col justify-center items-center bg-white py-12 px-24 border-4 border-sky-500 rounded-xl">
-                    <h1 className="mb-2">ADD MEDIA</h1>
+                    <h1 className="mb-2">EDIT MEDIA</h1>
                     <div className="flex flex-col items-start px-5">
                         <div className="mb-2 w-full flex">
                             <label htmlFor="title" className="mr-2">Title: </label>
@@ -60,8 +69,9 @@ function AddMedia({ toggleModal, fetchMedia, fetchAllMedia, fetchMediaType, curr
                         </div>
                     </div>
                     <div>
-                        <button className="bg-green-400 p-2 mr-5" onClick={saveNewMedia}>SAVE</button>
-                        <button className="bg-red-400 p-2" onClick={toggleModal}>EXIT</button>
+                        <button className="bg-green-400 p-2 mr-5" onClick={saveUpdatedMedia}>SAVE</button>
+                        <button className="bg-red-400 p-2 mr-5" onClick={() => toggleEditModal()}>EXIT</button>
+                        <button className="bg-gray-600 p-2" onClick={handleDeleteMedia}>DELETE</button>
                     </div>
 
                 </div>
@@ -70,4 +80,5 @@ function AddMedia({ toggleModal, fetchMedia, fetchAllMedia, fetchMediaType, curr
     )
 }
 
-export default AddMedia
+export default EditMedia
+

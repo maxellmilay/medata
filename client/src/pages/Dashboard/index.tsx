@@ -6,14 +6,17 @@ import AddMedia from "./AddMedia"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { MediaInfoType, MediaItemType } from "../../interface/MediaInterface"
+import EditMedia from "./EditMedia"
 
 function Dashboard() {
     const [modalOn, setModalOn] = useState(false)
+    const [editModal, setEditModal] = useState(false)
     const [mediaList, setMediaList] = useState<MediaItemType[]>([] as MediaItemType[])
     const [currentMedia, setCurrentMedia] = useState<MediaInfoType>({ title: '', owner: '', type: '', synopsis: '' } as MediaInfoType)
     const [mediaTypes, setMediaTypes] = useState<String[]>([] as String[])
     const [currentMediaType, setCurrentMediaType] = useState<String>('All')
     const [isDropped, setIsDropped] = useState<Boolean>(false)
+    const [currentMediaID, setCurrentMediaID] = useState<String>('')
 
 
     async function fetchMediaType() {
@@ -40,6 +43,10 @@ function Dashboard() {
         setModalOn(!modalOn)
     }
 
+    function toggleEditModal() {
+        setEditModal(!editModal)
+    }
+
     useEffect(() => {
         fetchAllMedia()
     }, [])
@@ -50,12 +57,13 @@ function Dashboard() {
             <div className="h-full grow flex flex-col">
                 <MediaFilter />
                 <div className="flex w-full">
-                    <MediaList fetchMediaType={fetchMediaType} fetchAllMedia={fetchAllMedia} isDropped={isDropped} setIsDropped={setIsDropped} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} toggleModal={toggleModal} fetchMedia={fetchMedia} mediaList={mediaList} setCurrentMedia={setCurrentMedia} />
+                    <MediaList setCurrentMediaID={setCurrentMediaID} currentMedia={currentMedia} toggleEditModal={toggleEditModal} fetchMediaType={fetchMediaType} fetchAllMedia={fetchAllMedia} isDropped={isDropped} setIsDropped={setIsDropped} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} toggleModal={toggleModal} fetchMedia={fetchMedia} mediaList={mediaList} setCurrentMedia={setCurrentMedia} />
                     {currentMedia.title !== '' && <MediaInfo currentMedia={currentMedia} />}
                 </div>
                 <div className="w-full grow" />
             </div>
-            {modalOn && <AddMedia toggleModal={toggleModal} fetchMedia={fetchMedia} />}
+            {modalOn && <AddMedia currentMediaType={currentMediaType} toggleModal={toggleModal} fetchMedia={fetchMedia} fetchAllMedia={fetchAllMedia} fetchMediaType={fetchMediaType} />}
+            {editModal && <EditMedia currentMedia={currentMedia} currentMediaType={currentMediaType} fetchMediaType={fetchMediaType} currentMediaID={currentMediaID} fetchAllMedia={fetchAllMedia} toggleEditModal={toggleEditModal} fetchMedia={fetchMedia} />}
         </div>
     )
 }

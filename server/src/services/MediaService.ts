@@ -8,6 +8,7 @@ import {
   where,
   getDoc,
   deleteDoc,
+  updateDoc,
 } from 'firebase/firestore';
 import db from '../db/firestore.js';
 
@@ -55,4 +56,9 @@ export async function getSingleMedia(queryID: any) {
 
 export async function deleteSingleMedia(queryID: any) {
   await deleteDoc(doc(db, 'media', queryID));
+}
+
+export async function updateSingleMedia(queryID: any, info: any) {
+  const docRef = doc(db, 'media', queryID);
+  await updateDoc(docRef, { ...info });
 }

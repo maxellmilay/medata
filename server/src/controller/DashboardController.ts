@@ -5,6 +5,7 @@ import {
   getSingleMedia,
   getAllFilteredMedia,
   deleteSingleMedia,
+  updateSingleMedia,
 } from '../services/MediaService.js';
 import { StatusCodes } from 'http-status-codes';
 
@@ -56,7 +57,7 @@ export async function fetchMediaItems(req: Request, res: Response) {
 export async function addMediaItem(req: Request, res: Response) {
   const newMedia = req.body;
   await createMedia(newMedia);
-  res.status(StatusCodes.OK).json(newMedia);
+  res.status(StatusCodes.OK).json({ msg: 'added' });
 }
 
 export async function fetchSingleMediaItem(req: Request, res: Response) {
@@ -65,12 +66,15 @@ export async function fetchSingleMediaItem(req: Request, res: Response) {
   res.status(StatusCodes.OK).json(currentMedia);
 }
 
-export function updateMediaItem(req: Request, res: Response) {
-  res.send('update media item');
+export async function updateMediaItem(req: Request, res: Response) {
+  const { id } = req.params;
+  const newMedia = req.body;
+  await updateSingleMedia(id, newMedia);
+  res.status(StatusCodes.OK).json({ msg: 'updated' });
 }
 
 export async function deleteMediaItem(req: Request, res: Response) {
   const { id } = req.params;
   await deleteSingleMedia(id);
-  res.status(StatusCodes.OK);
+  res.status(StatusCodes.OK).json({ msg: 'deleted' });
 }
