@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MediaInfoType } from '../../../interface/MediaInterface'
 import axios from 'axios'
+import ProgressDropdown from '../../../components/ProgressDropdown'
 
 type EditMediaProps = {
     currentMediaType: String
@@ -14,6 +15,16 @@ type EditMediaProps = {
 
 const EditMedia = ({ currentMedia, currentMediaID, toggleEditModal, currentMediaType, fetchMedia, fetchAllMedia, fetchMediaType }: EditMediaProps) => {
     const [newMedia, setNewMedia] = useState({ title: currentMedia.title, owner: currentMedia.owner, type: currentMedia.type, synopsis: currentMedia.synopsis, statusType: currentMedia.statusType, progress: currentMedia.progress, totalContent: currentMedia.totalContent })
+    const [isProgressDropped, setIsProgressDropped] = useState(false)
+    const [selectedStatus, setSelectedStatus] = useState(' ')
+
+    function handleProgressChange(type: any) {
+        setNewMedia({ ...newMedia, statusType: type })
+    }
+
+    function handleDropdown() {
+        setIsProgressDropped(!isProgressDropped)
+    }
 
     function handleMediaChange(e: React.ChangeEvent<HTMLInputElement>) {
         setNewMedia({ ...newMedia, [e.target.name]: e.target.value })
@@ -55,9 +66,12 @@ const EditMedia = ({ currentMedia, currentMediaID, toggleEditModal, currentMedia
                             <label htmlFor="synopsis" className="mr-2">Synopsis: </label>
                             <input type="text" id="synopsis" name='synopsis' value={newMedia.synopsis} onChange={e => handleMediaChange(e)} className="grow" />
                         </div>
-                        <div className="mb-2 w-full flex">
+                        <div className="relative mb-2 w-full flex">
                             <label htmlFor="statusType" className="mr-2">Status Type: </label>
-                            <input type="text" id="statusType" name='statusType' value={newMedia.statusType} onChange={e => handleMediaChange(e)} className="grow" />
+                            <div className="flex grow justify-center" onClick={handleDropdown}>
+                                <button className=" center">{selectedStatus}</button>
+                            </div>
+                            {isProgressDropped && <ProgressDropdown setSelectedStatus={setSelectedStatus} handleDropdown={handleDropdown} handleProgressChange={handleProgressChange} />}
                         </div>
                         <div className="mb-2 w-full flex">
                             <label htmlFor="progress" className="mr-2">Progress: </label>

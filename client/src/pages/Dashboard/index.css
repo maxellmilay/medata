@@ -19,3 +19,9 @@
 .add-item-button {
   height: 4.375rem;
 }
+
+.progress-dropdown {
+  left: 5.7rem;
+  top: 1.55rem;
+  width: 10.15rem;
+}

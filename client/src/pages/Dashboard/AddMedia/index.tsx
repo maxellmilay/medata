@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react"
 import { ToggleModalType } from "../../../interface/MediaInterface";
-import { MediaInfoType } from '../../../interface/MediaInterface'
+import ProgressDropdown from '../../../components/ProgressDropdown'
 
 type AddMediaProps = ToggleModalType & {
     fetchMedia: (type?: String) => Promise<void>
@@ -12,9 +12,15 @@ type AddMediaProps = ToggleModalType & {
 
 function AddMedia({ toggleModal, fetchMedia, fetchAllMedia, fetchMediaType, currentMediaType }: AddMediaProps) {
     const [newMedia, setNewMedia] = useState({ title: '', owner: '', type: '', synopsis: '', statusType: '', progress: 0, totalContent: 0 })
+    const [isProgressDropped, setIsProgressDropped] = useState(false)
+    const [selectedStatus, setSelectedStatus] = useState(' ')
 
     function handleMediaChange(e: React.ChangeEvent<HTMLInputElement>) {
         setNewMedia({ ...newMedia, [e.target.name]: e.target.value })
+    }
+
+    function handleProgressChange(type: string) {
+        setNewMedia({ ...newMedia, statusType: type })
     }
 
     async function saveNewMedia() {
@@ -22,6 +28,10 @@ function AddMedia({ toggleModal, fetchMedia, fetchAllMedia, fetchMediaType, curr
         await axios.post('http://localhost:5000/v1/media/addItem', newMedia)
         fetchMediaType()
         currentMediaType === "All" ? fetchAllMedia() : fetchMedia();
+    }
+
+    function handleDropdown() {
+        setIsProgressDropped(!isProgressDropped)
     }
 
     return (
@@ -46,13 +56,16 @@ function AddMedia({ toggleModal, fetchMedia, fetchAllMedia, fetchMediaType, curr
                             <label htmlFor="synopsis" className="mr-2">Synopsis: </label>
                             <input type="text" id="synopsis" name='synopsis' value={newMedia.synopsis} onChange={e => handleMediaChange(e)} className="grow" />
                         </div>
-                        <div className="mb-2 w-full flex">
+                        <div className="relative mb-2 w-full flex">
                             <label htmlFor="statusType" className="mr-2">Status Type: </label>
-                            <input type="text" id="statusType" name='statusType' value={newMedia.statusType} onChange={e => handleMediaChange(e)} className="grow" />
+                            <div className="flex grow justify-center" onClick={handleDropdown}>
+                                <button className=" center">{selectedStatus}</button>
+                            </div>
+                            {isProgressDropped && <ProgressDropdown setSelectedStatus={setSelectedStatus} handleDropdown={handleDropdown} handleProgressChange={handleProgressChange} />}
                         </div>
                         <div className="mb-2 w-full flex">
                             <label htmlFor="progress" className="mr-2">Progress: </label>
-                            <input type="number" id="progress" name='progress' value={newMedia.progress} onChange={e => handleMediaChange(e)} className="grow" />
+                            <input type="text" id="progress" name='progress' value={newMedia.progress} onChange={e => handleMediaChange(e)} className="grow" />
                         </div>
                         <div className="mb-2 w-full flex">
                             <label htmlFor="totalContent" className="mr-2">Total: </label>
