@@ -10,7 +10,7 @@ import {
   deleteDoc,
   updateDoc,
 } from 'firebase/firestore';
-import db from '../db/firestore.js';
+import db from '../firebase/firestore.js';
 
 type InfoType = {
   owner: string;
