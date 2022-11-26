@@ -10,7 +10,8 @@ import {
 import { StatusCodes } from 'http-status-codes';
 
 export async function fetchMediaTypes(req: Request, res: Response) {
-  const allMedia = await getAllMedia();
+  const { email } = req.query;
+  const allMedia = await getAllMedia(email);
   const mediaTypes: String[] = [];
   allMedia.forEach((item) => {
     const doesTypeExists = mediaTypes.includes(item.type);
@@ -23,12 +24,14 @@ export async function fetchMediaTypes(req: Request, res: Response) {
 }
 
 export async function fetchAllMedia(req: Request, res: Response) {
-  const allMedia = await getAllMedia();
+  const { email } = req.query;
+  const allMedia = await getAllMedia(email);
   res.status(StatusCodes.OK).json(allMedia);
 }
 
 export async function fetchStatusInfo(req: Request, res: Response) {
-  const allMedia = await getAllMedia();
+  const { email } = req.query;
+  const allMedia = await getAllMedia(email);
   const inProgress = allMedia.filter(
     (media) => media.statusType === 'In Progress'
   );
@@ -49,8 +52,8 @@ export async function fetchStatusInfo(req: Request, res: Response) {
 }
 
 export async function fetchMediaItems(req: Request, res: Response) {
-  const { type } = req.query;
-  const filteredMedia = await getAllFilteredMedia(type);
+  const { type, email } = req.query;
+  const filteredMedia = await getAllFilteredMedia(type, email);
   res.status(StatusCodes.OK).json(filteredMedia);
 }
 

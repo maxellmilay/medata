@@ -15,7 +15,7 @@ function ProfileInfo({ mediaList }: ProfileInfoPropsInterface) {
     const { displayName, email, profileImage } = useSelector((store: RootState) => store.user)
 
     async function fetchStatusInfo() {
-        const response = await axios.get('http://localhost:5000/v1/media/status')
+        const response = await axios.get(`http://localhost:5000/v1/media/status/?email=${email}`)
         const responseStatusNumbers = response.data
         setStatusNumbers(responseStatusNumbers)
     }

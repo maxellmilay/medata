@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react"
 import { ToggleModalType } from "../../../interface/MediaInterface";
 import ProgressDropdown from '../../../components/ProgressDropdown'
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 
 type AddMediaProps = ToggleModalType & {
     fetchMedia: (type?: String) => Promise<void>
@@ -11,7 +13,9 @@ type AddMediaProps = ToggleModalType & {
 }
 
 function AddMedia({ toggleModal, fetchMedia, fetchAllMedia, fetchMediaType, currentMediaType }: AddMediaProps) {
-    const [newMedia, setNewMedia] = useState({ title: '', owner: '', type: '', synopsis: '', statusType: '', progress: 0, totalContent: 0 })
+    const { email } = useSelector((store: RootState) => store.user)
+
+    const [newMedia, setNewMedia] = useState({ title: '', owner: '', type: '', synopsis: '', statusType: '', progress: 0, totalContent: 0, email })
     const [isProgressDropped, setIsProgressDropped] = useState(false)
     const [selectedStatus, setSelectedStatus] = useState(' ')
 

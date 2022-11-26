@@ -23,24 +23,24 @@ function Dashboard() {
 
     const dispatch = useDispatch()
 
-    const { displayName } = useSelector((store: RootState) => store.user)
+    const { email } = useSelector((store: RootState) => store.user)
 
     async function fetchMediaType() {
-        const response = await axios.get('http://localhost:5000/v1/media/types')
+        const response = await axios.get(`http://localhost:5000/v1/media/types/?email=${email}`)
         const responseMediaTypes = response.data
         setMediaTypes(responseMediaTypes)
     }
 
     async function fetchMedia(type?: String) {
         const queryType = type || currentMediaType
-        const response = await axios.get(`http://localhost:5000/v1/media/items/?type=${queryType}`)
+        const response = await axios.get(`http://localhost:5000/v1/media/items/?type=${queryType}&email=${email}`)
         const responseMediaData = response.data
         setMediaList(responseMediaData)
 
     }
 
     async function fetchAllMedia() {
-        const response = await axios.get('http://localhost:5000/v1/media/allItems')
+        const response = await axios.get(`http://localhost:5000/v1/media/allItems/?email=${email}`)
         const responseMediaData = response.data
         setMediaList(responseMediaData)
     }
