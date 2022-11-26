@@ -1,4 +1,4 @@
-import { firebaseApp } from './firebase.js';
+import { firebaseApp } from './index';
 import { getAuth } from 'firebase/auth';
 
 export const auth = getAuth(firebaseApp);

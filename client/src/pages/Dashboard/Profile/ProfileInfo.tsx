@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { StatusNumbers } from "../../../interface/MediaInterface"
 import axios from 'axios'
 import { MediaItemType } from '../../../interface/MediaInterface'
+import { useSelector } from "react-redux"
+import { RootState } from "../../../redux/store"
 
 interface ProfileInfoPropsInterface {
     mediaList: MediaItemType[]
@@ -9,6 +11,8 @@ interface ProfileInfoPropsInterface {
 
 function ProfileInfo({ mediaList }: ProfileInfoPropsInterface) {
     const [statusNumbers, setStatusNumbers] = useState<StatusNumbers>()
+
+    const { displayName, email, profileImage } = useSelector((store: RootState) => store.user)
 
     async function fetchStatusInfo() {
         const response = await axios.get('http://localhost:5000/v1/media/status')
@@ -22,14 +26,9 @@ function ProfileInfo({ mediaList }: ProfileInfoPropsInterface) {
 
     return (
         <div className="w-full flex flex-col items-center px-5 py-5 profile-info border-b">
-            <div className="w-32 h-32 bg-blue-500"></div>
-            <h3 className="mt-1.5 font-bold open-sans-bold">Maxell Milay</h3>
-            <p className="open-sans text-xs">milaymaxell@gmail.com</p>
-            <div className="flex justify-between mt-4">
-                <div className="bg-blue-500 w-7 h-7 mr-3"></div>
-                <div className="bg-blue-500 w-7 h-7 mr-3"></div>
-                <div className="bg-blue-500 w-7 h-7"></div>
-            </div>
+            <img src={profileImage} alt="ProfPic" className="w-32 h-32"></img>
+            <h3 className="mt-5 font-bold open-sans-bold">{displayName}</h3>
+            <p className="open-sans text-xs">{email}</p>
             <div className="flex mt-2.5 mb-1">
                 <div className="flex flex-col items-center w-20">
                     <p className="font-bold open-sans text-sm">{statusNumbers?.completed}</p>

@@ -3,29 +3,38 @@ import SingupContainer from "./Signup";
 import SignupRedirect from "./Login/SignupRedirect";
 import LoginRedirect from "./Signup/LoginRedirect";
 import LoginContainer from "./Login";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FrontendRoute } from "../../enums/Routes";
+import { login } from "../../services/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
-function Auth() {
-    const navigate = useNavigate();
-    const [isLoggingIn, setIsLoggingIn] = useState(true)
+interface AuthPropsInterface {
+    handleLoggedInState: () => void
+    isLoggedIn: boolean
+}
 
-    function handleLogin(): void {
-        navigate(FrontendRoute.DASHBOARD);
-    }
+function Auth({ handleLoggedInState, isLoggedIn }: AuthPropsInterface) {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    function handleAuthSwitch(): void {
-        setIsLoggingIn(!isLoggingIn)
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate(FrontendRoute.DASHBOARD)
+        }
+    }, [isLoggedIn])
+
+    async function handleLogin() {
+        try {
+            await login(dispatch, handleLoggedInState)
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
         <div className="h-screen w-screen grid place-items-center">
-            <div className="bg-blue-300 w-3/5 h-3/4 flex">
-                {isLoggingIn
-                    ? <><LoginContainer handleLogin={handleLogin} /><SignupRedirect handleAuthSwitch={handleAuthSwitch} /></>
-                    : <><LoginRedirect handleAuthSwitch={handleAuthSwitch} /><SingupContainer /> </>}
-
-            </div>
+            <button onClick={handleLogin} className="bg-blue-300 p-6 flex">LOGIN WITH GOOGLE</button>
         </div>
     )
 }

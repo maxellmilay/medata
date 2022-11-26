@@ -7,6 +7,9 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { MediaInfoType, MediaItemType } from "../../interface/MediaInterface"
 import EditMedia from "./EditMedia"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
+import { handleAuthState } from "../../services/auth"
 
 function Dashboard() {
     const [modalOn, setModalOn] = useState(false)
@@ -18,6 +21,9 @@ function Dashboard() {
     const [isDropped, setIsDropped] = useState<Boolean>(false)
     const [currentMediaID, setCurrentMediaID] = useState<String>('')
 
+    const dispatch = useDispatch()
+
+    const { displayName } = useSelector((store: RootState) => store.user)
 
     async function fetchMediaType() {
         const response = await axios.get('http://localhost:5000/v1/media/types')
@@ -49,6 +55,7 @@ function Dashboard() {
 
     useEffect(() => {
         fetchAllMedia()
+        handleAuthState(dispatch)
     }, [])
 
     return (
