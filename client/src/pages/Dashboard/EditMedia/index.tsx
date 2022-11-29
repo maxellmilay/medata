@@ -11,9 +11,10 @@ type EditMediaProps = {
     fetchAllMedia: () => Promise<void>
     currentMediaID: String
     fetchMediaType: () => Promise<void>
+    handleMediaItemOnClick: (id: String) => Promise<void>
 }
 
-const EditMedia = ({ currentMedia, currentMediaID, toggleEditModal, currentMediaType, fetchMedia, fetchAllMedia, fetchMediaType }: EditMediaProps) => {
+const EditMedia = ({ handleMediaItemOnClick, currentMedia, currentMediaID, toggleEditModal, currentMediaType, fetchMedia, fetchAllMedia, fetchMediaType }: EditMediaProps) => {
     const [newMedia, setNewMedia] = useState({ title: currentMedia.title, owner: currentMedia.owner, type: currentMedia.type, synopsis: currentMedia.synopsis, statusType: currentMedia.statusType, progress: currentMedia.progress, totalContent: currentMedia.totalContent, photoURL: currentMedia.photoURL })
     const [isProgressDropped, setIsProgressDropped] = useState(false)
     const [selectedStatus, setSelectedStatus] = useState(' ')
@@ -34,14 +35,14 @@ const EditMedia = ({ currentMedia, currentMediaID, toggleEditModal, currentMedia
         toggleEditModal();
         await axios.patch(`http://localhost:5000/v1/media/item/${currentMediaID}`, newMedia)
         fetchMediaType()
-        currentMediaType === "All" ? await fetchAllMedia() : await fetchMedia();
+        currentMediaType === "All" ? fetchAllMedia() : fetchMedia();
+        handleMediaItemOnClick(currentMediaID)
     }
 
     async function handleDeleteMedia() {
         await axios.delete(`http://localhost:5000/v1/media/item/${currentMediaID}`)
         currentMediaType === "All" ? fetchAllMedia() : fetchMedia();
         toggleEditModal()
-
     }
 
     return (

@@ -9,7 +9,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase/auth';
 import { RootState } from './redux/store';
 import { handleAuthState } from './services/auth';
-import Redirect from './pages/Auth/Redirect';
+import Redirect from './pages/Auth/components/Redirect';
 import { login } from './services/auth';
 
 

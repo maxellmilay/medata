@@ -7,9 +7,6 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { MediaInfoType, MediaItemType } from "../../interface/MediaInterface"
 import EditMedia from "./EditMedia"
-import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
-import { handleAuthState } from "../../services/auth"
 
 interface DashboardPropsInterface {
     handleLogoutState: () => void
@@ -25,8 +22,6 @@ function Dashboard({ handleLogoutState, email }: DashboardPropsInterface) {
     const [currentMediaType, setCurrentMediaType] = useState<String>('All')
     const [isDropped, setIsDropped] = useState<Boolean>(false)
     const [currentMediaID, setCurrentMediaID] = useState<String>('')
-
-    const dispatch = useDispatch()
 
     async function fetchMediaType() {
         const response = await axios.get(`http://localhost:5000/v1/media/types/?email=${email}`)
@@ -67,7 +62,7 @@ function Dashboard({ handleLogoutState, email }: DashboardPropsInterface) {
 
     useEffect(() => {
         fetchAllMedia()
-    }, [email])
+    }, [])
 
     return (
         <div className="h-full flex relative">
@@ -81,7 +76,7 @@ function Dashboard({ handleLogoutState, email }: DashboardPropsInterface) {
                 <div className="w-full grow" />
             </div>
             {modalOn && <AddMedia currentMediaType={currentMediaType} toggleModal={toggleModal} fetchMedia={fetchMedia} fetchAllMedia={fetchAllMedia} fetchMediaType={fetchMediaType} />}
-            {editModal && <EditMedia currentMedia={currentMedia} currentMediaType={currentMediaType} fetchMediaType={fetchMediaType} currentMediaID={currentMediaID} fetchAllMedia={fetchAllMedia} toggleEditModal={toggleEditModal} fetchMedia={fetchMedia} />}
+            {editModal && <EditMedia handleMediaItemOnClick={handleMediaItemOnClick} currentMedia={currentMedia} currentMediaType={currentMediaType} fetchMediaType={fetchMediaType} currentMediaID={currentMediaID} fetchAllMedia={fetchAllMedia} toggleEditModal={toggleEditModal} fetchMedia={fetchMedia} />}
         </div>
     )
 }

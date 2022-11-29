@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FrontendRoute } from '../../enums/Routes'
+import { FrontendRoute } from '../../../enums/Routes'
 
 const Redirect = () => {
     const navigate = useNavigate()
