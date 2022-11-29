@@ -60,6 +60,10 @@ function Dashboard({ handleLogoutState, email }: DashboardPropsInterface) {
         setEditModal(!editModal)
     }
 
+    function handleResetMedia() {
+        setCurrentMedia({ title: '', owner: '', type: '', synopsis: '' } as MediaInfoType)
+    }
+
     useEffect(() => {
         fetchAllMedia()
     }, [])
@@ -76,7 +80,7 @@ function Dashboard({ handleLogoutState, email }: DashboardPropsInterface) {
                 <div className="w-full grow" />
             </div>
             {modalOn && <AddMedia currentMediaType={currentMediaType} toggleModal={toggleModal} fetchMedia={fetchMedia} fetchAllMedia={fetchAllMedia} fetchMediaType={fetchMediaType} />}
-            {editModal && <EditMedia handleMediaItemOnClick={handleMediaItemOnClick} currentMedia={currentMedia} currentMediaType={currentMediaType} fetchMediaType={fetchMediaType} currentMediaID={currentMediaID} fetchAllMedia={fetchAllMedia} toggleEditModal={toggleEditModal} fetchMedia={fetchMedia} />}
+            {editModal && <EditMedia handleResetMedia={handleResetMedia} handleMediaItemOnClick={handleMediaItemOnClick} currentMedia={currentMedia} currentMediaType={currentMediaType} fetchMediaType={fetchMediaType} currentMediaID={currentMediaID} fetchAllMedia={fetchAllMedia} toggleEditModal={toggleEditModal} fetchMedia={fetchMedia} />}
         </div>
     )
 }
