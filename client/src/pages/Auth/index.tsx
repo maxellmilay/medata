@@ -1,8 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import SingupContainer from "./Signup";
-import SignupRedirect from "./Login/SignupRedirect";
-import LoginRedirect from "./Signup/LoginRedirect";
-import LoginContainer from "./Login";
 import { useEffect, useState } from "react";
 import { FrontendRoute } from "../../enums/Routes";
 import { login } from "../../services/auth";
@@ -10,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
 interface AuthPropsInterface {
-    handleLoggedInState: () => void
     isLoggedIn: boolean
+    handleLogin(): Promise<void>
 }
 
-function Auth({ handleLoggedInState, isLoggedIn }: AuthPropsInterface) {
+function Auth({ handleLogin, isLoggedIn }: AuthPropsInterface) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -24,17 +20,15 @@ function Auth({ handleLoggedInState, isLoggedIn }: AuthPropsInterface) {
         }
     }, [isLoggedIn])
 
-    async function handleLogin() {
-        try {
-            await login(dispatch, handleLoggedInState)
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    
 
     return (
         <div className="h-screen w-screen grid place-items-center">
-            <button onClick={handleLogin} className="bg-blue-300 p-6 flex">LOGIN WITH GOOGLE</button>
+            <div className="flex items-center flex-col">
+                <p className="mb-2 text-3xl">MEDATA</p>
+                <p className="mb-16 italic">store media progress</p>
+                <button onClick={handleLogin} className="border border-black p-6 flex hover:bg-slate-200">LOGIN WITH GOOGLE</button>
+            </div>
         </div>
     )
 }

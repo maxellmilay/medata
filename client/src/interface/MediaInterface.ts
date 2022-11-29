@@ -13,6 +13,7 @@ export interface MediaInfoType extends StatusInterface {
   owner: string;
   type: string;
   synopsis: string;
+  photoURL: string;
 }
 
 export interface StatusNumbers {

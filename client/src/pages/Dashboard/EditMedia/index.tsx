@@ -14,7 +14,7 @@ type EditMediaProps = {
 }
 
 const EditMedia = ({ currentMedia, currentMediaID, toggleEditModal, currentMediaType, fetchMedia, fetchAllMedia, fetchMediaType }: EditMediaProps) => {
-    const [newMedia, setNewMedia] = useState({ title: currentMedia.title, owner: currentMedia.owner, type: currentMedia.type, synopsis: currentMedia.synopsis, statusType: currentMedia.statusType, progress: currentMedia.progress, totalContent: currentMedia.totalContent })
+    const [newMedia, setNewMedia] = useState({ title: currentMedia.title, owner: currentMedia.owner, type: currentMedia.type, synopsis: currentMedia.synopsis, statusType: currentMedia.statusType, progress: currentMedia.progress, totalContent: currentMedia.totalContent, photoURL: currentMedia.photoURL })
     const [isProgressDropped, setIsProgressDropped] = useState(false)
     const [selectedStatus, setSelectedStatus] = useState(' ')
 
@@ -34,7 +34,7 @@ const EditMedia = ({ currentMedia, currentMediaID, toggleEditModal, currentMedia
         toggleEditModal();
         await axios.patch(`http://localhost:5000/v1/media/item/${currentMediaID}`, newMedia)
         fetchMediaType()
-        currentMediaType === "All" ? fetchAllMedia() : fetchMedia();
+        currentMediaType === "All" ? await fetchAllMedia() : await fetchMedia();
     }
 
     async function handleDeleteMedia() {
@@ -57,6 +57,10 @@ const EditMedia = ({ currentMedia, currentMediaID, toggleEditModal, currentMedia
                         <div className="mb-2 w-full flex">
                             <label htmlFor="owner" className="mr-2">Owner: </label>
                             <input type="text" id="owner" name='owner' value={newMedia.owner} onChange={e => handleMediaChange(e)} className="grow" />
+                        </div>
+                        <div className="mb-2 w-full flex">
+                            <label htmlFor="photoURL" className="mr-2">Photo URL: </label>
+                            <input type="text" id="photoURL" name='photoURL' value={newMedia.photoURL} onChange={e => handleMediaChange(e)} className="grow" />
                         </div>
                         <div className="mb-2 w-full flex">
                             <label htmlFor="type" className="mr-2">Type: </label>

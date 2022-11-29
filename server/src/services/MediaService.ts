@@ -21,6 +21,7 @@ type InfoType = {
   progress: number;
   totalContent: number;
   email: string;
+  photoURL: string;
 };
 
 export async function createMedia(info: InfoType) {

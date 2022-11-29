@@ -12,8 +12,8 @@
 }
 
 .media-pic {
-  min-height: 15rem;
-  min-width: 15rem;
+  max-width: 15rem;
+  height: auto;
 }
 
 .add-item-button {

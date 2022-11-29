@@ -11,23 +11,18 @@ type MediaItemProps = {
     toggleEditModal: () => void
     currentMedia: MediaInfoType
     setCurrentMediaID: React.Dispatch<React.SetStateAction<String>>
+    handleMediaItemOnClick: (id: String) => void
 }
 
-function MediaItem({ setCurrentMediaID, currentMedia, toggleEditModal, mediaItem, currentMediaType, setCurrentMedia, fetchMedia, fetchAllMedia }: MediaItemProps) {
-    async function handleMediaItemOnClick() {
-        const currentMedia = await axios.get(`http://localhost:5000/v1/media/item/${mediaItem.id}`)
-        const currentMediaData = currentMedia.data
-        setCurrentMedia(currentMediaData)
-        setCurrentMediaID(mediaItem.id)
-    }
+function MediaItem({ handleMediaItemOnClick, setCurrentMediaID, currentMedia, toggleEditModal, mediaItem, currentMediaType, setCurrentMedia, fetchMedia, fetchAllMedia }: MediaItemProps) {
 
-    async function handleEditMedia() {
-        await handleMediaItemOnClick()
+    function handleEditMedia() {
+        handleMediaItemOnClick(mediaItem.id)
         toggleEditModal()
     }
 
     return (
-        <div className="w-full flex px-5 py-5 items-center border bg-gray-100" onClick={handleMediaItemOnClick}>
+        <div className="w-full flex px-5 py-5 items-center border bg-gray-100" onClick={() => handleMediaItemOnClick(mediaItem.id)}>
             <button className="flex grow">
                 <div className="flex flex-col items-start grow">
                     <p className="open-sans text-sm font-bold">{mediaItem.title}</p>

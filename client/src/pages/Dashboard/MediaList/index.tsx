@@ -18,9 +18,10 @@ type MediaListProps = ToggleModalType & {
     toggleEditModal: () => void
     currentMedia: MediaInfoType
     setCurrentMediaID: React.Dispatch<React.SetStateAction<String>>
+    handleMediaItemOnClick: (id: String) => void
 }
 
-function MediaList({ setCurrentMediaID, currentMedia, toggleEditModal, fetchMediaType, fetchAllMedia, toggleModal, fetchMedia, mediaList, setCurrentMedia, mediaTypes, currentMediaType, setCurrentMediaType, isDropped, setIsDropped }: MediaListProps) {
+function MediaList({ handleMediaItemOnClick, setCurrentMediaID, currentMedia, toggleEditModal, fetchMediaType, fetchAllMedia, toggleModal, fetchMedia, mediaList, setCurrentMedia, mediaTypes, currentMediaType, setCurrentMediaType, isDropped, setIsDropped }: MediaListProps) {
 
     useEffect(() => {
         fetchMediaType()
@@ -32,7 +33,7 @@ function MediaList({ setCurrentMediaID, currentMedia, toggleEditModal, fetchMedi
             <TypeTitle fetchAllMedia={fetchAllMedia} isDropped={isDropped} setIsDropped={setIsDropped} mediaTypes={mediaTypes} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} fetchMedia={fetchMedia} />
             <div className="flex flex-col media-list overflow-auto scrollbar">
                 {mediaList.map((item: MediaItemType, index) => {
-                    return <MediaItem key={index} setCurrentMediaID={setCurrentMediaID} currentMedia={currentMedia} toggleEditModal={toggleEditModal} fetchAllMedia={fetchAllMedia} currentMediaType={currentMediaType} fetchMedia={fetchMedia} mediaItem={item} setCurrentMedia={setCurrentMedia} />
+                    return <MediaItem key={index} handleMediaItemOnClick={handleMediaItemOnClick} setCurrentMediaID={setCurrentMediaID} currentMedia={currentMedia} toggleEditModal={toggleEditModal} fetchAllMedia={fetchAllMedia} currentMediaType={currentMediaType} fetchMedia={fetchMedia} mediaItem={item} setCurrentMedia={setCurrentMedia} />
                 })}
             </div>
             <AddMediaButton toggleModal={toggleModal} />

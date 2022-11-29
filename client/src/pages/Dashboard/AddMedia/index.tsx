@@ -15,7 +15,7 @@ type AddMediaProps = ToggleModalType & {
 function AddMedia({ toggleModal, fetchMedia, fetchAllMedia, fetchMediaType, currentMediaType }: AddMediaProps) {
     const { email } = useSelector((store: RootState) => store.user)
 
-    const [newMedia, setNewMedia] = useState({ title: '', owner: '', type: '', synopsis: '', statusType: '', progress: 0, totalContent: 0, email })
+    const [newMedia, setNewMedia] = useState({ title: '', owner: '', type: '', synopsis: '', statusType: '', progress: 0, totalContent: 0, email, photoURL: '' })
     const [isProgressDropped, setIsProgressDropped] = useState(false)
     const [selectedStatus, setSelectedStatus] = useState(' ')
 
@@ -51,6 +51,10 @@ function AddMedia({ toggleModal, fetchMedia, fetchAllMedia, fetchMediaType, curr
                         <div className="mb-2 w-full flex">
                             <label htmlFor="owner" className="mr-2">Owner: </label>
                             <input type="text" id="owner" name='owner' value={newMedia.owner} onChange={e => handleMediaChange(e)} className="grow" />
+                        </div>
+                        <div className="mb-2 w-full flex">
+                            <label htmlFor="photoURL" className="mr-2">Photo URL: </label>
+                            <input type="text" id="photoURL" name='photoURL' value={newMedia.photoURL} onChange={e => handleMediaChange(e)} className="grow" />
                         </div>
                         <div className="mb-2 w-full flex">
                             <label htmlFor="type" className="mr-2">Type: </label>

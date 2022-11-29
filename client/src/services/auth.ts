@@ -34,8 +34,8 @@ export async function login(
     });
 }
 
-export async function handleAuthState(dispatch: Dispatch<AnyAction>) {
-  await onAuthStateChanged(auth, (user) => {
+export function handleAuthState(dispatch: Dispatch<AnyAction>) {
+  onAuthStateChanged(auth, (user) => {
     dispatch(
       SET_CURRENT_USER({
         displayName: user?.displayName,

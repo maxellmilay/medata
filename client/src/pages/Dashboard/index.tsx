@@ -11,7 +11,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../redux/store"
 import { handleAuthState } from "../../services/auth"
 
-function Dashboard() {
+interface DashboardPropsInterface {
+    handleLogoutState: () => void
+    email: string
+}
+
+function Dashboard({ handleLogoutState, email }: DashboardPropsInterface) {
     const [modalOn, setModalOn] = useState(false)
     const [editModal, setEditModal] = useState(false)
     const [mediaList, setMediaList] = useState<MediaItemType[]>([] as MediaItemType[])
@@ -22,8 +27,6 @@ function Dashboard() {
     const [currentMediaID, setCurrentMediaID] = useState<String>('')
 
     const dispatch = useDispatch()
-
-    const { email } = useSelector((store: RootState) => store.user)
 
     async function fetchMediaType() {
         const response = await axios.get(`http://localhost:5000/v1/media/types/?email=${email}`)
@@ -43,6 +46,15 @@ function Dashboard() {
         const response = await axios.get(`http://localhost:5000/v1/media/allItems/?email=${email}`)
         const responseMediaData = response.data
         setMediaList(responseMediaData)
+        console.log(response);
+
+    }
+
+    async function handleMediaItemOnClick(id: String) {
+        const currentMedia = await axios.get(`http://localhost:5000/v1/media/item/${id}`)
+        const currentMediaData = currentMedia.data
+        setCurrentMedia(currentMediaData)
+        setCurrentMediaID(id)
     }
 
     function toggleModal() {
@@ -55,17 +67,16 @@ function Dashboard() {
 
     useEffect(() => {
         fetchAllMedia()
-        handleAuthState(dispatch)
-    }, [])
+    }, [email])
 
     return (
         <div className="h-full flex relative">
-            <Profile mediaList={mediaList} fetchMedia={fetchMedia} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} fetchMediaType={fetchMediaType} />
+            <Profile handleLogoutState={handleLogoutState} mediaList={mediaList} fetchMedia={fetchMedia} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} fetchMediaType={fetchMediaType} />
             <div className="h-full grow flex flex-col">
                 <MediaFilter />
                 <div className="flex w-full">
-                    <MediaList setCurrentMediaID={setCurrentMediaID} currentMedia={currentMedia} toggleEditModal={toggleEditModal} fetchMediaType={fetchMediaType} fetchAllMedia={fetchAllMedia} isDropped={isDropped} setIsDropped={setIsDropped} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} toggleModal={toggleModal} fetchMedia={fetchMedia} mediaList={mediaList} setCurrentMedia={setCurrentMedia} />
-                    {currentMedia.title !== '' && <MediaInfo currentMedia={currentMedia} />}
+                    <MediaList handleMediaItemOnClick={handleMediaItemOnClick} setCurrentMediaID={setCurrentMediaID} currentMedia={currentMedia} toggleEditModal={toggleEditModal} fetchMediaType={fetchMediaType} fetchAllMedia={fetchAllMedia} isDropped={isDropped} setIsDropped={setIsDropped} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} toggleModal={toggleModal} fetchMedia={fetchMedia} mediaList={mediaList} setCurrentMedia={setCurrentMedia} />
+                    {currentMedia.title !== '' && <MediaInfo currentMediaID={currentMediaID} handleMediaItemOnClick={handleMediaItemOnClick} currentMedia={currentMedia} />}
                 </div>
                 <div className="w-full grow" />
             </div>
