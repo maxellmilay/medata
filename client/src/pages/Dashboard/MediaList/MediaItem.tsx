@@ -22,7 +22,7 @@ function MediaItem({ handleMediaItemOnClick, setCurrentMediaID, currentMedia, to
     }
 
     return (
-        <div className="w-full flex px-5 py-5 items-center border bg-gray-100" onClick={() => handleMediaItemOnClick(mediaItem.id)}>
+        <div className="w-full flex px-5 py-5 items-center border bg-gray-100 hover:bg-gray-200" onClick={() => handleMediaItemOnClick(mediaItem.id)}>
             <button className="flex grow">
                 <div className="flex flex-col items-start grow">
                     <p className="open-sans text-sm font-bold">{mediaItem.title}</p>

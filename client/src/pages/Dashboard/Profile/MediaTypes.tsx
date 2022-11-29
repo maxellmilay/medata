@@ -25,7 +25,7 @@ function MediaTypes({ mediaTypes, fetchMediaType, setCurrentMediaType, fetchMedi
             </h3>
             <div className="flex flex-col items-start first-letter:overflow-auto scrollbar w-full media-type-list">
                 {mediaTypes.map((type: String) => {
-                    return <button key={type as React.Key} className="mt-1 text-xs open-sans" onClick={() => handleChangeMediaType(type)}>{type}</button>
+                    return <button key={type as React.Key} className="mt-1 text-xs open-sans w-full hover:bg-gray-100" onClick={() => handleChangeMediaType(type)}>{type}</button>
                 })}
             </div>
         </div>
