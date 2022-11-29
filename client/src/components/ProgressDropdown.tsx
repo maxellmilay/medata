@@ -17,9 +17,8 @@ const ProgressDropdown = ({ setSelectedStatus, handleDropdown, handleProgressCha
 
     return (
         <div className='absolute flex flex-col bg-white progress-dropdown border-l border-t border-r border-black'>
-            <button className='p-1 border-b border-black' onClick={() => handleDropdownClick(ProgressStatus.IN_PROGRESS)}>In Progress</button>
-            <button className='p-1 border-b border-black' onClick={() => handleDropdownClick(ProgressStatus.COMPLETED)}>Completed</button>
-            <button className='p-1 border-b border-black' onClick={() => handleDropdownClick(ProgressStatus.NONE)}>None</button>
+            <button className='p-1 border-b border-black hover:bg-slate-200' onClick={() => handleDropdownClick(ProgressStatus.IN_PROGRESS)}>In Progress</button>
+            <button className='p-1 border-b border-black hover:bg-slate-200' onClick={() => handleDropdownClick(ProgressStatus.COMPLETED)}>Completed</button>
         </div>
     )
 }

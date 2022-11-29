@@ -2,11 +2,11 @@ import Profile from "./Profile"
 import MediaList from "./MediaList"
 import MediaInfo from "./MediaInfo"
 import MediaFilter from "./MediaFilter"
-import AddMedia from "./AddMedia"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { MediaInfoType, MediaItemType } from "../../interface/MediaInterface"
-import EditMedia from "./EditMedia"
+import GeneralModal from '../../components/GeneralModal'
+import SettingsModal from "./MediaFilter/components/SettingsModal"
 
 interface DashboardPropsInterface {
     handleLogoutState: () => void
@@ -14,10 +14,11 @@ interface DashboardPropsInterface {
 }
 
 function Dashboard({ handleLogoutState, email }: DashboardPropsInterface) {
-    const [modalOn, setModalOn] = useState(false)
-    const [editModal, setEditModal] = useState(false)
+    const [addModalOn, setAddModalOn] = useState(false)
+    const [editModalOn, setEditModalOn] = useState(false)
+    const [settingsModalOn, setSettingsModalOn] = useState(false)
     const [mediaList, setMediaList] = useState<MediaItemType[]>([] as MediaItemType[])
-    const [currentMedia, setCurrentMedia] = useState<MediaInfoType>({ title: '', owner: '', type: '', synopsis: '' } as MediaInfoType)
+    const [currentMedia, setCurrentMedia] = useState<MediaInfoType>({ title: '', owner: '', type: '', synopsis: '', email: '' } as MediaInfoType)
     const [mediaTypes, setMediaTypes] = useState<String[]>([] as String[])
     const [currentMediaType, setCurrentMediaType] = useState<String>('All')
     const [isDropped, setIsDropped] = useState<Boolean>(false)
@@ -41,23 +42,26 @@ function Dashboard({ handleLogoutState, email }: DashboardPropsInterface) {
         const response = await axios.get(`http://localhost:5000/v1/media/allItems/?email=${email}`)
         const responseMediaData = response.data
         setMediaList(responseMediaData)
-        console.log(response);
-
     }
 
     async function handleMediaItemOnClick(id: String) {
-        const currentMedia = await axios.get(`http://localhost:5000/v1/media/item/${id}`)
-        const currentMediaData = currentMedia.data
+        const currentLocalMedia = await axios.get(`http://localhost:5000/v1/media/item/${id}`)
+        const currentMediaData = currentLocalMedia.data
         setCurrentMedia(currentMediaData)
+        console.log("fetched item data", currentMedia.statusType);
         setCurrentMediaID(id)
     }
 
-    function toggleModal() {
-        setModalOn(!modalOn)
+    function toggleAddModal() {
+        setAddModalOn(!addModalOn)
     }
 
     function toggleEditModal() {
-        setEditModal(!editModal)
+        setEditModalOn(!editModalOn)
+    }
+
+    function toggleSettingsModal() {
+        setSettingsModalOn(!settingsModalOn)
     }
 
     function handleResetMedia() {
@@ -72,15 +76,16 @@ function Dashboard({ handleLogoutState, email }: DashboardPropsInterface) {
         <div className="h-full flex relative">
             <Profile handleLogoutState={handleLogoutState} mediaList={mediaList} fetchMedia={fetchMedia} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} fetchMediaType={fetchMediaType} />
             <div className="h-full grow flex flex-col">
-                <MediaFilter />
+                <MediaFilter toggleSettingsModal={toggleSettingsModal} />
                 <div className="flex w-full">
-                    <MediaList handleMediaItemOnClick={handleMediaItemOnClick} setCurrentMediaID={setCurrentMediaID} currentMedia={currentMedia} toggleEditModal={toggleEditModal} fetchMediaType={fetchMediaType} fetchAllMedia={fetchAllMedia} isDropped={isDropped} setIsDropped={setIsDropped} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} toggleModal={toggleModal} fetchMedia={fetchMedia} mediaList={mediaList} setCurrentMedia={setCurrentMedia} />
+                    <MediaList handleMediaItemOnClick={handleMediaItemOnClick} setCurrentMediaID={setCurrentMediaID} currentMedia={currentMedia} toggleEditModal={toggleEditModal} fetchMediaType={fetchMediaType} fetchAllMedia={fetchAllMedia} isDropped={isDropped} setIsDropped={setIsDropped} currentMediaType={currentMediaType} setCurrentMediaType={setCurrentMediaType} mediaTypes={mediaTypes} toggleAddModal={toggleAddModal} fetchMedia={fetchMedia} mediaList={mediaList} setCurrentMedia={setCurrentMedia} />
                     {currentMedia.title !== '' && <MediaInfo currentMediaID={currentMediaID} handleMediaItemOnClick={handleMediaItemOnClick} currentMedia={currentMedia} />}
                 </div>
                 <div className="w-full grow" />
             </div>
-            {modalOn && <AddMedia currentMediaType={currentMediaType} toggleModal={toggleModal} fetchMedia={fetchMedia} fetchAllMedia={fetchAllMedia} fetchMediaType={fetchMediaType} />}
-            {editModal && <EditMedia handleResetMedia={handleResetMedia} handleMediaItemOnClick={handleMediaItemOnClick} currentMedia={currentMedia} currentMediaType={currentMediaType} fetchMediaType={fetchMediaType} currentMediaID={currentMediaID} fetchAllMedia={fetchAllMedia} toggleEditModal={toggleEditModal} fetchMedia={fetchMedia} />}
+            {addModalOn && <GeneralModal modalType="ADD" currentMediaType={currentMediaType} currentMedia={currentMedia} fetchMedia={fetchMedia} fetchAllMedia={fetchAllMedia} currentMediaID={currentMediaID} fetchMediaType={fetchMediaType} handleMediaItemOnClick={handleMediaItemOnClick} handleResetMedia={handleResetMedia} toggleModal={toggleAddModal} />}
+            {editModalOn && <GeneralModal modalType="EDIT" currentMediaType={currentMediaType} currentMedia={currentMedia} fetchMedia={fetchMedia} fetchAllMedia={fetchAllMedia} currentMediaID={currentMediaID} fetchMediaType={fetchMediaType} handleMediaItemOnClick={handleMediaItemOnClick} handleResetMedia={handleResetMedia} toggleModal={toggleEditModal} />}
+            {settingsModalOn && <SettingsModal toggleModal={toggleSettingsModal}/>}
         </div>
     )
 }

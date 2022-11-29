@@ -26,7 +26,7 @@ function ProfileInfo({ mediaList }: ProfileInfoPropsInterface) {
 
     return (
         <div className="w-full flex flex-col items-center px-5 py-5 profile-info border-b">
-            <img src={profileImage} alt="ProfPic" className="w-32 h-32"></img>
+            <img src={profileImage} referrerPolicy="no-referrer" alt="ProfPic" className="w-32 h-32"></img>
             <h3 className="mt-5 font-bold open-sans-bold">{displayName}</h3>
             <p className="open-sans text-xs">{email}</p>
             <div className="flex mt-2.5 mb-1">

@@ -16,10 +16,12 @@ function Misc({ handleLogoutState }: MiscPropsInterface) {
     }
 
     return (
-        <button onClick={handleLogoutButtonClick} className="w-full flex px-5 py-6 space-between friend-list border-t">
-            <Logout />
-            <p>Logout</p>
-        </button>
+        <div className="flex px-5 py-6 justify-center friend-list border-t">
+            <button className="flex items-center hover:text-red-400" onClick={handleLogoutButtonClick} >
+                <Logout />
+                <p>Logout</p>
+            </button>
+        </div>
     )
 }
 

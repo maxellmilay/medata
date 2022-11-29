@@ -3,5 +3,5 @@ export enum ProgressStatus {
   COMPLETED = 'Completed',
   TO_EXPLORE = 'To Explore',
   DROPPED = 'Dropped',
-  NONE = '',
+  NONE = ' ',
 }

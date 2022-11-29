@@ -20,11 +20,11 @@ function Auth({ handleLogin, isLoggedIn }: AuthPropsInterface) {
         }
     }, [isLoggedIn])
 
-    
+
 
     return (
-        <div className="h-screen w-screen grid place-items-center">
-            <div className="flex items-center flex-col">
+        <div className="h-screen w-screen grid place-items-center login-container">
+            <div className="flex items-center flex-col ">
                 <p className="mb-2 text-3xl">MEDATA</p>
                 <p className="mb-16 italic">store media progress</p>
                 <button onClick={handleLogin} className="border border-black p-6 flex hover:bg-slate-200">LOGIN WITH GOOGLE</button>

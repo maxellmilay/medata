@@ -1,10 +1,10 @@
 import { useEffect } from "react"
-import { MediaItemType, ToggleModalType, MediaInfoType } from "../../../interface/MediaInterface"
+import { MediaItemType, MediaInfoType } from "../../../interface/MediaInterface"
 import MediaItem from "./MediaItem"
 import TypeTitle from "./TypeTitle"
 import AddMediaButton from "./AddIMediaButton"
 
-type MediaListProps = ToggleModalType & {
+type MediaListProps = {
     fetchMedia: (type?: String) => Promise<void>
     mediaList: MediaItemType[]
     setCurrentMedia: React.Dispatch<React.SetStateAction<MediaInfoType>>
@@ -16,12 +16,13 @@ type MediaListProps = ToggleModalType & {
     fetchAllMedia: () => Promise<void>
     fetchMediaType: () => Promise<void>
     toggleEditModal: () => void
+    toggleAddModal: () => void
     currentMedia: MediaInfoType
     setCurrentMediaID: React.Dispatch<React.SetStateAction<String>>
     handleMediaItemOnClick: (id: String) => void
 }
 
-function MediaList({ handleMediaItemOnClick, setCurrentMediaID, currentMedia, toggleEditModal, fetchMediaType, fetchAllMedia, toggleModal, fetchMedia, mediaList, setCurrentMedia, mediaTypes, currentMediaType, setCurrentMediaType, isDropped, setIsDropped }: MediaListProps) {
+function MediaList({ handleMediaItemOnClick, setCurrentMediaID, currentMedia, toggleEditModal, fetchMediaType, fetchAllMedia, toggleAddModal, fetchMedia, mediaList, setCurrentMedia, mediaTypes, currentMediaType, setCurrentMediaType, isDropped, setIsDropped }: MediaListProps) {
 
     useEffect(() => {
         fetchMediaType()
@@ -36,7 +37,7 @@ function MediaList({ handleMediaItemOnClick, setCurrentMediaID, currentMedia, to
                     return <MediaItem key={index} handleMediaItemOnClick={handleMediaItemOnClick} setCurrentMediaID={setCurrentMediaID} currentMedia={currentMedia} toggleEditModal={toggleEditModal} fetchAllMedia={fetchAllMedia} currentMediaType={currentMediaType} fetchMedia={fetchMedia} mediaItem={item} setCurrentMedia={setCurrentMedia} />
                 })}
             </div>
-            <AddMediaButton toggleModal={toggleModal} />
+            <AddMediaButton toggleAddModal={toggleAddModal} />
         </div>
     )
 }

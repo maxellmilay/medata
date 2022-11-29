@@ -22,10 +22,10 @@ function TypeDropDown({ fetchAllMedia, mediaTypes, setCurrentMediaType, fetchMed
 
     return (
         <div className="flex flex-col absolute bg-white top-20 w-full items-center border-b">
-            <button className="w-full py-2 border-y" onClick={handleAllTypeDropDownClick}>All</button>
+            <button className="w-full py-2 border-y hover:bg-slate-200" onClick={handleAllTypeDropDownClick}>All</button>
             {mediaTypes.map((type) => {
                 return (
-                    <button className="w-full py-2 border-y" onClick={() => handleTypeDropDownClick(type)}>{type}</button>
+                    <button className="w-full py-2 border-y hover:bg-slate-200" onClick={() => handleTypeDropDownClick(type)}>{type}</button>
                 )
             })}
         </div>

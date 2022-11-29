@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('./pages/Auth/index.css');
 @import url('./pages/Dashboard/Profile/index.css');
 @import url('./pages/Dashboard/index.css');
 @import url('./styles/fonts.css');
@@ -27,4 +28,3 @@ code {
 #root {
   height: 100%;
 }
-

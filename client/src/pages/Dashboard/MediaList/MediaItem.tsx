@@ -1,4 +1,6 @@
+import { current } from "@reduxjs/toolkit"
 import axios from "axios"
+import { useState } from "react"
 import { MediaInfoType, MediaItemType } from "../../../interface/MediaInterface"
 import EditIcon from "./components/EditIcon"
 
@@ -14,10 +16,10 @@ type MediaItemProps = {
     handleMediaItemOnClick: (id: String) => void
 }
 
-function MediaItem({ handleMediaItemOnClick, setCurrentMediaID, currentMedia, toggleEditModal, mediaItem, currentMediaType, setCurrentMedia, fetchMedia, fetchAllMedia }: MediaItemProps) {
+function MediaItem({ handleMediaItemOnClick, toggleEditModal, mediaItem, setCurrentMedia, fetchMedia, fetchAllMedia }: MediaItemProps) {
 
-    function handleEditMedia() {
-        handleMediaItemOnClick(mediaItem.id)
+    async function handleEditMedia() {
+        await handleMediaItemOnClick(mediaItem.id)
         toggleEditModal()
     }
 
@@ -29,7 +31,7 @@ function MediaItem({ handleMediaItemOnClick, setCurrentMediaID, currentMedia, to
                     <p className="xxs open-sans">{mediaItem.owner}</p>
                 </div>
             </button>
-            <button onClick={handleEditMedia}><EditIcon /></button>
+            <button className="hover:text-blue-400" onClick={handleEditMedia}><EditIcon /></button>
         </div>
     )
 }

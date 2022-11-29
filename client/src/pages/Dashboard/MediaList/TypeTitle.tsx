@@ -1,5 +1,5 @@
 import TypeDropDown from "./TypeDropDown"
-import ChevronDown from './components/ChevronDown'
+import ChevronDown from '../../../components/ChevronDown'
 
 type TypeTitleProps = {
     mediaTypes: String[]
@@ -19,7 +19,7 @@ function TypeTitle({ fetchAllMedia, mediaTypes, currentMediaType, setCurrentMedi
 
     return (
         <div className="flex items-center font-bold h-20 border-b relative w-full">
-            <button className="flex h-full items-center w-full" onClick={handleDrop}>
+            <button className="flex h-full items-center w-full pr-7 hover:bg-gray-200" onClick={handleDrop}>
                 <h1 className="ml-10 mr-auto open-sans font-bold">{currentMediaType}</h1>
                 <ChevronDown />
             </button>

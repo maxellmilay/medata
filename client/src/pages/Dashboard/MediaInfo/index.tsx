@@ -24,7 +24,7 @@ function MediaInfo({ handleMediaItemOnClick, currentMedia, currentMediaID }: Med
                         <p>{currentMedia.statusType}</p>
                     </div>
                     <div className="px-1 py-1 bg-white border border-gray-400 rounded">
-                        <p>{currentMedia.progress}/{currentMedia.totalContent}</p>
+                        <p>{currentMedia.progress}/{currentMedia.total}</p>
                     </div>
                 </div>
             </div>

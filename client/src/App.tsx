@@ -38,8 +38,6 @@ function App() {
 
   useEffect(() => {
     handleAuthState(dispatch)
-    console.log("app effect", email);
-
   })
 
 

@@ -14,6 +14,7 @@ export interface MediaInfoType extends StatusInterface {
   type: string;
   synopsis: string;
   photoURL: string;
+  email: string
 }
 
 export interface StatusNumbers {
