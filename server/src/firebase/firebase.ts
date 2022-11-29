@@ -1,13 +1,16 @@
 import { initializeApp } from 'firebase/app';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAhBRtqEdkSALLFf53CVX6x0U42lMiYb5M',
-  authDomain: 'medata-44b97.firebaseapp.com',
-  projectId: 'medata-44b97',
-  storageBucket: 'medata-44b97.appspot.com',
-  messagingSenderId: '793591323326',
-  appId: '1:793591323326:web:4764dbf124c601f30b9cef',
-  measurementId: 'G-C1W5LE7K2P',
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
 
 export const firebaseApp = initializeApp(firebaseConfig);
